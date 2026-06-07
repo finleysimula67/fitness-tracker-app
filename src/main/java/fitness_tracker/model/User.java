@@ -30,18 +30,19 @@ public class User {
     private String lastName;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     @Builder.Default
     private List<Activity> activities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     @Builder.Default
-    private List<Activity> recommendations= new ArrayList<>();
+    private List<Recommendation> recommendations = new ArrayList<>();
 }
