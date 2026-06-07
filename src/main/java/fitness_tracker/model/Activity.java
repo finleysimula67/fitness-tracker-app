@@ -3,10 +3,14 @@ package fitness_tracker.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Activity {
 
     @Id
@@ -24,7 +28,11 @@ public class Activity {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id" , nullable = false,foreignKey = @ForeignKey(name = "fk_activity_user"))
+    @JoinColumn(
+            name = "user_id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_activity_user")
+    )
     @JsonIgnore
     private User user;
 
@@ -33,15 +41,27 @@ public class Activity {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String,Object> additionalMetrics;
+    private Map<String, Object> additionalMetrics;
 
     private Integer duration;
+
     private Integer caloriesBurned;
+
     private LocalDateTime startTime;
+
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "activity" , cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "activity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @JsonIgnore
+    @Builder.Default
     private List<Recommendation> recommendations = new ArrayList<>();
 }
