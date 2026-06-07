@@ -6,7 +6,6 @@ import fitness_tracker.model.User;
 import fitness_tracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
 
 
 @Service
@@ -16,8 +15,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserResponse register(RegisterRequest request) {
-
-        LocalDateTime now = LocalDateTime.now();
 
         User user = User.builder()
                 .email(request.getEmail())
