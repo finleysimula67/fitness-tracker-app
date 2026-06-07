@@ -45,4 +45,8 @@ public class RecommendationService {
     {
         return recommendationRepository.findByUserId(userId);
     }
+
+    public List<Recommendation> getActivityRecommendation(String activityId) {
+        return recommendationRepository.findByActivityId(activityId);
+    }
 }
