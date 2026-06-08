@@ -29,6 +29,9 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
