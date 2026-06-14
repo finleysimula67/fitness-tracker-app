@@ -43,6 +43,7 @@ public class ActivityService {
 
         ActivityResponse response = new ActivityResponse();
         response.setType(savedactivity.getType());
+        response.setUser_id(savedactivity.getUser().getId());
         response.setAdditionalMetrics(savedactivity.getAdditionalMetrics());
         response.setDuration(savedactivity.getDuration());
         response.setId(savedactivity.getId()     );
@@ -50,6 +51,7 @@ public class ActivityService {
         response.setStartTime(savedactivity.getStartTime());
         response.setCreatedAt(savedactivity.getCreatedAt());
         response.setUpdatedAt(savedactivity.getUpdatedAt());
+
 
         return response;
     }
