@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This is the "Advice Engine." It processes and saves fitness tips,
+ * improvements, and safe workout suggestions for the users.
+ */
 @Service
 @RequiredArgsConstructor
 public class RecommendationService {
@@ -20,14 +24,18 @@ public class RecommendationService {
     private final ActivityRepository activityRepository;
     private final UserRepository userRepository;
 
+    /** Links a new piece of workout feedback to a user profile and saves it */
     public Recommendation generateRecommendation(RecommendationRequest request) {
 
+        /** Make sure the receiving user exists */
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(()->new RuntimeException("User not found: "+request.getUserId()));
 
+        /** Make sure the workout session linked to this advice exists */
         Activity activity = activityRepository.findById(request.getActivityId())
                 .orElseThrow(()->new RuntimeException("Activity not found: "+request.getActivityId()));
 
+        /** Put together the complete advice object with suggestions and safety rules */
         Recommendation recommendation = Recommendation.builder()
                 .user(user)
                 .activity(activity)
@@ -38,14 +46,17 @@ public class RecommendationService {
                 .recommendation(request.getRecommendation())
                 .build();
 
+        /** Write and save this advice permanently in the database table */
         return recommendationRepository.save(recommendation);
     }
 
+    /** Fetches all saved tips and suggestions designed for one user */
     public List<Recommendation> getUserRecommendation(String userId)
     {
         return recommendationRepository.findByUserId(userId);
     }
 
+    /** Fetches all advice notes attached to one single exercise session log */
     public List<Recommendation> getActivityRecommendation(String activityId) {
         return recommendationRepository.findByActivityId(activityId);
     }
