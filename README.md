@@ -65,10 +65,10 @@ API is live at `http://localhost:8080` ✅
 
 ### 🏃 Activities — token required
 
-| What | Method | Endpoint |
-|---  |---  |---  |
-| Log a new activity   | `POST`     | `/api/activities`   |
-| Get all your activities   | `GET`   | `/api/activities`   |
+| What   | Method   | Endpoint |
+|---    |---  |---  |
+| Log a new activity     | `POST`       | `/api/activities`   |
+| Get all your activities     | `GET`     | `/api/activities`   |
 
 > Pass your user ID in the request header: `X-User_ID: your-user-id`
 
