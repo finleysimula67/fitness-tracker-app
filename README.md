@@ -66,19 +66,19 @@ API is live at `http://localhost:8080` ✅
 ### 🏃 Activities — token required
 
 | What | Method | Endpoint |
-|---|---|---|
-| Log a new activity | `POST` | `/api/activities` |
-| Get all your activities | `GET` | `/api/activities` |
+|---  |---  |---  |
+| Log a new activity   | `POST`     | `/api/activities`   |
+| Get all your activities   | `GET`   | `/api/activities`   |
 
 > Pass your user ID in the request header: `X-User_ID: your-user-id`
 
 ### 💡 Recommendations — token required
 
-| What | Method | Endpoint |
-|---|---|---|
-| Generate a recommendation | `POST` | `/api/recommendation/generate` |
-| Get recommendations by user | `GET` | `/api/recommendation/user/{userId}` |
-| Get recommendations by activity | `GET` | `/api/recommendation/activity/{activityId}` |
+| What   | Method | Endpoint |
+|---  |---|  ---|
+| Generate a recommendation   | `POST` |   `/api/recommendation/generate` |
+| Get recommendations by user   | `GET` |   `/api/recommendation/user/{userId}` |
+| Get recommendations by activity   | `GET`|   `/api/recommendation/activity/{activityId}` |
 
 > After logging in, include your token in every request: `Authorization: Bearer <your-token>`
 
