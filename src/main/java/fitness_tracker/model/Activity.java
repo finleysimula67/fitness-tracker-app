@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This file represents a single workout record (like a run or gym session)
+ * that will be saved in the database.
+ */
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,10 +27,12 @@ import java.util.Map;
 @Builder
 public class Activity {
 
+    /** A unique, random ID string given to this specific workout log */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    /** Links this workout to the specific User who performed it */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "user_id",
@@ -36,26 +42,34 @@ public class Activity {
     @JsonIgnore
     private User user;
 
+    /** The type of exercise chosen from the list below (like RUNNING or YOGA) */
     @Enumerated(EnumType.STRING)
     private ActivityType type;
 
+    /** A flexible storage space for custom metrics, saved in an advanced format (JSON) */
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private Map<String, Object> additionalMetrics;
 
+    /** How long the workout lasted in minutes */
     private Integer duration;
 
+    /** Total number of calories burned */
     private Integer caloriesBurned;
 
+    /** The exact date and time the user started the exercise */
     private LocalDateTime startTime;
 
+    /** Automatically saves the exact date and time when this record was created */
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    /** Automatically updates the date and time whenever this record is edited */
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    /** A list of all AI fitness tips or advice generated for this specific workout */
     @OneToMany(
             mappedBy = "activity",
             cascade = CascadeType.ALL,
