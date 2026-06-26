@@ -1,6 +1,7 @@
 package fitness_tracker.service;
 
 import fitness_tracker.dto.LoginRequest;
+import fitness_tracker.dto.LoginResponse;
 import fitness_tracker.dto.RegisterRequest;
 import fitness_tracker.dto.UserResponse;
 import fitness_tracker.model.User;
@@ -71,5 +72,11 @@ public class UserService {
 
         /** If everything matches up perfectly, pass back the authenticated user profile */
         return user;
+    }
+
+    public LoginResponse loginbyId(User user) {
+        User user = new User();
+        user.setId();
+
     }
 }
